@@ -5,12 +5,13 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     public List<WheelCollider> wheels;
+    public GameObject canvasEnd;
+    Material black_metal;
+
     // Air
     public float thrust;
     public float lift = 0;
-    private float drag = 10f;
     private float torque = 20000f;
-    private float turnSpeed = 0.2f;
     // Ground
     public float acceleration;
 
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (!isFlying)
         {
             rb.angularDrag = 0.8f;
-            thrust = 30000f;
+            thrust = 20000f;
             isFlying = MovingOnGround();
         }
         else
@@ -63,6 +64,11 @@ public class PlayerController : MonoBehaviour
         roll = Input.GetAxis("Horizontal");
         yaw = Input.GetAxis("Yaw");
         brake = Input.GetAxis("Jump");
+
+        if (Input.GetKeyDown("escape"))
+        {
+            canvasEnd.SetActive(true);
+        }
     }
 
     bool Flying()
